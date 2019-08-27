@@ -16,3 +16,6 @@
 - Ver sua experiência codificando
 - CLEAN CODE
 - Keep it simple =] 
+
+### Prazo de entrega
+Após recebimento do e-mail o candidato terá 48hrs para entregar o projeto.
