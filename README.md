@@ -7,6 +7,7 @@
 
 
 ### O que esperamos ?
+- Encaminhar o link do seu repositório do Github
 - Explicação de como rodar localmente e também como seria possível realizar o deploy.
 - Testes
 - Legibilidade
