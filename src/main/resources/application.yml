@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url:  jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    url:  jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'src/main/resources/db/migration/V1__criar_e_registrar_pessoa_fisica.sql';
     username: sa
     password: sa
   h2:
@@ -9,7 +9,7 @@ spring:
       enabled: true
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
     show-sql: true
     generate-ddl: false
     properties:
