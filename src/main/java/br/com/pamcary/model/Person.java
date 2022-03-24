@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "sequence_pessoa_fisica")
     @Column(name = "CODIGO")
     private long Id;
     @Column(name = "NOME")
