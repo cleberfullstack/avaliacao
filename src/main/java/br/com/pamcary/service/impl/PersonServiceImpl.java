@@ -8,6 +8,7 @@ import br.com.pamcary.repository.PersonRepository;
 import br.com.pamcary.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,7 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     private PersonMapper personMapper;
 
+    @Transactional
     @Override
     public Optional<PersonResponseDTO> create(RequestPersonDTO requestPersonDTO) {
         Person person = personMapper.toEntity(requestPersonDTO);
@@ -44,13 +46,32 @@ public class PersonServiceImpl implements PersonService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
-    public Optional<PersonResponseDTO> Update(RequestPersonDTO requestPersonDTO) {
-        return Optional.empty();
+    public Optional<PersonResponseDTO> Update(long id, RequestPersonDTO requestPersonDTO) {
+
+       Optional<Person> personOptional =  repository.findById(id);
+
+       if(!personOptional.isPresent())  return Optional.empty();
+
+       Person person = personOptional.get();
+       person.setName(person.getName());
+       person.setCpf(requestPersonDTO.getCpf());
+       person.setBirth(requestPersonDTO.getBirth());
+
+       return Optional.of(personMapper.toDto(person));
+
     }
 
+    @Transactional
     @Override
-    public void Delete() {
+    public boolean Delete(long id) {
+      Optional<Person> personOptional =  repository.findById(id);
+      if(!personOptional.isPresent()) return false;
+
+      repository.delete(personOptional.get());
+
+      return true;
 
     }
 }

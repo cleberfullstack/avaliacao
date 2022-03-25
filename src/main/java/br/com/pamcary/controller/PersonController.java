@@ -45,7 +45,7 @@ public class PersonController implements PersonOperation {
         Optional<PersonResponseDTO> optionalPersonResponseDTO = personService.create(requestPersonDTO);
 
         if(!optionalPersonResponseDTO.isPresent()){
-            return ResponseEntity.ok(null);
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.created(URI.create("/persons/"+ requestPersonDTO.getCpf())).build();
     }
@@ -57,6 +57,12 @@ public class PersonController implements PersonOperation {
 
     @Override
     public ResponseEntity<?> delete(long id) {
-        return null;
+
+       boolean result = personService.Delete(id);
+
+       if(result == true){
+           return ResponseEntity.noContent().build();
+       }
+        return ResponseEntity.notFound().build();
     }
 }
